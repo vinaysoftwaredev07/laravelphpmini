@@ -78,8 +78,8 @@ class EmployeeController extends Controller
             $request->validate([
                 'first_name' => 'required|max:255',
                 'last_name' => 'required|max:255',
-                'email' => 'required|email|max:255|unique:employee',
-                'phone' => 'required|regex:/[0-9]{10}/|unique:employee',
+                'email' => 'required|email|max:255',
+                'phone' => 'required|regex:/[0-9]{10}/',
                 'company' => 'required',
             ]);
     
@@ -94,7 +94,7 @@ class EmployeeController extends Controller
         }
         $data['company_data'] = Company::all();
         $data['employee_data'] = $employee;
-        return view('employees.add', $data);
+        return view('employees.edit', $data);
     }
 
     /**
