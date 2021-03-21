@@ -32,6 +32,6 @@ Calling Jwt access token
 
 ## OAuth2.0 Authentication
 
-This is pendin with the implementation.
+This is pending with the implementation.
 
 
