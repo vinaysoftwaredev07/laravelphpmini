@@ -25,6 +25,7 @@ Route::group(["middleware" => "auth"], function(){
     Route::post('/employee/edit/{id}', 'EmployeeController@edit');
     Route::get('/employee/add', 'EmployeeController@add');
     Route::post('/employee/add', 'EmployeeController@add');
+    Route::post('/employee/delete', 'EmployeeController@delete');
 
     Route::get('/companies', 'CompanyController@index');
     Route::get('/company/edit/{id}', 'CompanyController@edit');
@@ -32,6 +33,7 @@ Route::group(["middleware" => "auth"], function(){
     Route::get('/company/add', 'CompanyController@add');
     Route::post('/company/add', 'CompanyController@add');
     Route::post('/company/fetch', 'CompanyController@fetch');
+    Route::post('/company/delete', 'CompanyController@delete');
 
 });
 

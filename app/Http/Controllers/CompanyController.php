@@ -54,7 +54,7 @@ class CompanyController extends Controller
             $request->validate([
                 'name' => 'required|max:255',
                 'email' => 'required|email|max:255|unique:company',
-                'photo' => 'required|mimes:jpeg,jpg,png|dimensions:max_width=100,max_height=100|max:512',
+                'photo' => 'required|mimes:jpeg,jpg,png|dimensions:min_width=100,min_height=100|max:512',
                 'website' => 'required|max:255|unique:company',
             ]);
             $filename = 'companies/'. str_replace(' ', '_', $request->name) . '/'.$request->file('photo')->getClientOriginalName();
@@ -67,11 +67,18 @@ class CompanyController extends Controller
             $company->logo = $request->photo;
             $company->website = $request->website;
             $company->save();
-
-            Mail::send('emails.mailEvent', $user, function($message) use ($user) {
-                $message->to($user->email);
-                $message->subject('Mailgun Testing');
-            });
+            
+            try{
+                /*
+                * Using snd box environment will not work in live mail sending
+                */
+                Mail::send('emails.companies.companyCreated', $company->toArray(), function($message) use ($company) {
+                    $message->to($company->email);
+                    $message->subject('Mailgun Testing');
+                });
+            }catch(\Exception $e){
+                return redirect('companies')->withErrors(['Unable to send mail']);
+            }
 
             return redirect('companies');
         }
@@ -94,7 +101,7 @@ class CompanyController extends Controller
             $request->validate([
                 'name' => 'required|max:255',
                 'email' => 'required|email|max:255',
-                'photo' => 'mimes:jpeg,jpg,png|dimensions:max_width=100,max_height=100|max:512',
+                'photo' => 'mimes:jpeg,jpg,png|dimensions:min_width=100,min_height=100|max:512',
                 'website' => 'required|max:255',
             ]);
 
@@ -125,11 +132,12 @@ class CompanyController extends Controller
      */
     public function delete(Request $request)
     {
-        $segments = request()->segments();
-        $id = $segments[2];
+        $id = $request->id;
         if(!empty($request->toDelete) && $request->toDelete == 1){
             $record = Company::findOrFail($id);
             $record->delete();
+            $record->status = 0;
+            $record->save();
         }
         return redirect('companies');
     }

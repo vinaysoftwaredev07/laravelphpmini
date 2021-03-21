@@ -37,7 +37,7 @@
                         </div>
                         <div class="form-group">
                             <label for="company">Employee of Company</label>
-                            <select class="form-control">
+                            <select class="form-control" name="company">
                                 @foreach($company_data as $company)
                                     <option value="{{ $company->id }}" {{ ($employee_data->company->id == $company->id) ? 'Selected' : ''; }}>{{ $company->name }}</option>
                                 @endforeach

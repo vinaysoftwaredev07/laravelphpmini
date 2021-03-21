@@ -2,6 +2,14 @@
 
 @section('content')
 <div class="container">
+    @foreach($errors->all() as $error)
+        <div class="alert alert-danger" role="alert">
+            {{$error}}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    @endforeach
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
@@ -42,7 +50,9 @@
                                     <td>
                                         <a class="btn btn-info" href="{{ url('company/edit/'. $company->id) }}">Edit</a>    
                                         <form method="POST" action="{{ url('company/delete') }}">
-                                            <input type="hidden" name="toDelete" valuw="1" />
+                                            <input type="hidden" name="id" value="{{ $company->id }}" />
+                                            <input type="hidden" name="toDelete" value="1" />
+                                            @csrf
                                             <input type="submit" class="btn btn-danger" value="Delete" />  
                                         </form>
                                     </td>

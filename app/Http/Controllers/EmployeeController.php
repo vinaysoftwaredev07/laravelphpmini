@@ -38,13 +38,14 @@ class EmployeeController extends Controller
     public function add(Request $request)
     {   
         $data = [];
+        // print_r($request->all()); exit;
         if(!empty($request->all())){
             $request->validate([
                 'first_name' => 'required|max:255',
                 'last_name' => 'required|max:255',
                 'email' => 'required|email|max:255|unique:employee',
                 'phone' => 'required|regex:/[0-9]{10}/|unique:employee',
-                'company' => 'required',
+                'company' => 'required|min:1',
             ]);
     
             $employee = new Employee();
@@ -52,7 +53,7 @@ class EmployeeController extends Controller
             $employee->last_name = $request->last_name;
             $employee->email = $request->email;
             $employee->phone = $request->phone;
-            $employee->company_id = $request->company;
+            $employee->companyid = $request->company;
     
             $employee->save();
 
@@ -86,7 +87,7 @@ class EmployeeController extends Controller
             $employee->last_name = $request->last_name;
             $employee->email = $request->email;
             $employee->phone = $request->phone;
-            $employee->company_id = $request->company;
+            $employee->companyid = $request->company;
     
             $employee->save();
             return redirect('employees');
@@ -101,12 +102,11 @@ class EmployeeController extends Controller
      */
     public function delete(Request $request)
     {
-        $segments = request()->segments();
-        $id = $segments[2];
+        $id = $request->id;
         if(!empty($request->toDelete) && $request->toDelete == 1){
             $record = Employee::findOrFail($id);
             $record->delete();
         }
-        return redirect('companies');
+        return redirect('employees');
     }
 }

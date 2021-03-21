@@ -17,7 +17,7 @@ class CreateEmployeeTable extends Migration
             $table->bigIncrements('id');
             $table->string('first_name');
             $table->string('last_name');
-            $table->integer('company')->unsigned();
+            $table->integer('companyid')->unsigned();
             $table->string('email')->unique();
             $table->string('phone');
             $table->tinyInteger('status')->default(1);
