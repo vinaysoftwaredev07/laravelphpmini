@@ -46,6 +46,16 @@ return [
             'provider' => 'users',
             // 'hash' => false,
         ],
+
+        'client' => [
+            'driver' => env('DEFAULT_API_DRIVER', 'jwt'),
+            'provider' => 'client',
+        ],
+
+        'administrator' => [
+            'driver' => env('DEFAULT_API_DRIVER', 'jwt'),
+            'provider' => 'administrator',
+        ],
     ],
 
     /*
@@ -100,4 +110,4 @@ return [
         ],
     ],
 
-];
+]; 

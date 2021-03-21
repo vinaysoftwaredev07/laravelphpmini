@@ -34,7 +34,7 @@ Route::group([
     // 'middleware' => 'api',
     'prefix' => 'jwt'
 
-], function ($router) {
+], function () {
 
     Route::post('login', 'JwtAuthController@login');
     Route::post('logout', 'JwtAuthController@logout');
