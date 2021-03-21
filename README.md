@@ -23,8 +23,8 @@ To check with jwt auth need to change the guard from we to api and for creating 
 
 Calling Jwt access token
 
- - http://localhost:8000/api/jwt/login > To Validate and generate jwt token to get access to the data
- - http://localhost:8000/api/jwt/me > Getting data with respect to access token provided
+ - /api/jwt/login > To Validate and generate jwt token to get access to the data
+ - /api/jwt/me > Getting data with respect to access token provided
 
 
 
