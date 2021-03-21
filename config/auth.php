@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'api', // env('DEFAULT_GUARD', 'web'),
+        'guard' => env('DEFAULT_GUARD', 'web'),
         'passwords' => 'users',
     ],
 
@@ -42,7 +42,7 @@ return [
         ],
 
         'api' => [
-            'driver' => 'passport', // env('DEFAULT_API_DRIVER', 'jwt'),
+            'driver' => env('DEFAULT_API_DRIVER', 'jwt'),
             'provider' => 'users',
             // 'hash' => false,
         ],
