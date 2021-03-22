@@ -106,6 +106,8 @@ class EmployeeController extends Controller
         if(!empty($request->toDelete) && $request->toDelete == 1){
             $record = Employee::findOrFail($id);
             $record->delete();
+            $record->status = 0;
+            $record->save();
         }
         return redirect('employees');
     }

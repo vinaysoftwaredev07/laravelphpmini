@@ -52,7 +52,7 @@ class CompanyController extends Controller
     {
         if(!empty($request->all())){
             $request->validate([
-                'name' => 'required|max:255',
+                'name' => 'required|max:255|unique:company',
                 'email' => 'required|email|max:255|unique:company',
                 'photo' => 'required|mimes:jpeg,jpg,png|dimensions:min_width=100,min_height=100|max:512',
                 'website' => 'required|max:255|unique:company',
