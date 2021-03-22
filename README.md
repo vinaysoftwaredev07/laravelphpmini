@@ -32,6 +32,11 @@ Calling Jwt access token
 
 ## OAuth2.0 Authentication
 
-This is pending with the implementation.
+After login into the web ( Mean to say with web guard) app authentication with Admin User,
+
+ - Click on Developer
+ - Create Personal Access Token to access the data from API ( Passport has been used for OAuth2.0 )
+ - Change the Default guard to API and API Driver to passport
+ - /api/user - got the User Details ( Admin User Details )
 
 
